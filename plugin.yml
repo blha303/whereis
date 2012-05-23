@@ -1,0 +1,8 @@
+name: WhereIs
+main: tk.blha303.WhereIs
+version: 1.0
+commands:
+   whereis:
+      description: Shows a player's coordinates.
+      usage: /whereis [player]
+      aliases: [b3whereis,where,coords]
