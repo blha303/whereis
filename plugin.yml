@@ -1,8 +1,12 @@
 name: WhereIs
 main: tk.blha303.WhereIs
-version: 1.0
+version: 2.0
+permissions:
+    whereis.allow:
+        description: Allows players to use /whereis to locate other players.
+        default: true
 commands:
-   whereis:
-      description: Shows a player's coordinates.
-      usage: /whereis [player]
-      aliases: [b3whereis,where,coords]
+    whereis:
+        description: Shows a player's coordinates.
+        usage: /whereis [player]
+        aliases: [b3whereis,where,coords]
