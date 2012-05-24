@@ -1,4 +1,4 @@
-# WhereIs
+# [WhereIs](http://dev.bukkit.org/server-mods/b3whereis)
 
 A plugin that shows a player's in-game coordinates. Can be used from either the console, or by any in-game player. 
 
