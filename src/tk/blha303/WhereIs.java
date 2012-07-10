@@ -56,6 +56,7 @@ public class WhereIs extends JavaPlugin implements Listener {
 		}
 		getServer().getPluginManager().registerEvents(this, this);
 		setupPermissions();
+		saveConfig();
         log.info(String.format("[%s] Enabled version %s", getDescription().getName(), getDescription().getVersion()));
 	}
     
@@ -63,6 +64,13 @@ public class WhereIs extends JavaPlugin implements Listener {
         RegisteredServiceProvider<Permission> rsp = getServer().getServicesManager().getRegistration(Permission.class);
         perms = rsp.getProvider();
         return perms != null;
+    }
+    
+    // http://stackoverflow.com/a/2275030
+    public boolean contains(String haystack, String needle) {
+    	  haystack = haystack == null ? "" : haystack;
+    	  needle = needle == null ? "" : needle;
+    	  return haystack.toLowerCase().contains(needle.toLowerCase());
     }
     
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -104,6 +112,10 @@ public class WhereIs extends JavaPlugin implements Listener {
     				Player other = Bukkit.getServer().getPlayer(playername);
     				if (other == null) {
     					sender.sendMessage(ChatColor.RED + args[0] + " does not match a player name!");
+    					return true;
+    				}
+    				if (contains(getConfig().getString("world"), other.getWorld().getName())) {
+    					sender.sendMessage(ChatColor.RED + other.getDisplayName() + " is on a world where location is prohibited.");
     					return true;
     				}
     				int targetx = other.getLocation().getBlockX();

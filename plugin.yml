@@ -1,6 +1,6 @@
 name: WhereIs
 main: tk.blha303.WhereIs
-version: 2.2
+version: 2.3
 permissions:
     whereis.allow:
         description: Allows players to use /whereis to locate other players.
