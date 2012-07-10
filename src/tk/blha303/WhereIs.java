@@ -1,6 +1,10 @@
 package tk.blha303;
 
 /*
+ * v2.3
+ * Implemented multi-world support, on request from lochlain on mcaddictgallery.info.
+ * It's the same multi-world setup I used on PlacePay. Maybe buggy, but I'm sure server owners can work around it.
+ * 
  * v2.2
  * Changed colours on the location messages. Now if a player is op, the red op colour won't reset the rest of the message to white.
  * (For some reason, Eclipse thinks 'colour' is spelt wrong. Nooooope. I'm right.)

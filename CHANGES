@@ -1,0 +1,24 @@
+v2.3
+Implemented multi-world support, on request from lochlain on mcaddictgallery.info.
+It's the same multi-world setup I used on PlacePay. Maybe buggy, but I'm sure server owners can work around it.
+
+v2.2
+Changed colours on the location messages. Now if a player is op, the red op colour won't reset the rest of the message to white.
+(For some reason, Eclipse thinks 'colour' is spelt wrong. Nooooope. I'm right.)
+World names are also in red now.
+Modified 'permission denied' message slightly to tell the console that someone was denied access to the command.
+
+v2.1
+'/whereis' on its own now shows version number as well as usage info.
+
+v2.0
+Now has permission node (whereis.allow) and therefore requires Vault. Players have this node by default.
+Now shows what world a player is in, if they're in a different world. (player command only)
+
+v1.1
+Recompiled in Java 6. Is now compatible with 6/7.
+
+v1.0
+/whereis PLAYERNAME returns their coordinates
+No restrictions as yet. Permissions will be in the next full release.
+Not multi-world. This will also be in the next full release.
