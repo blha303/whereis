@@ -1,6 +1,8 @@
 package tk.blha303;
 
 /*
+ * v3.0
+ * Distance.
  * v2.3
  * Implemented multi-world support, on request from lochlain on mcaddictgallery.info.
  * It's the same multi-world setup I used on PlacePay. Maybe buggy, but I'm sure server owners can work around it.
@@ -127,7 +129,7 @@ public class WhereIs extends JavaPlugin implements Listener {
     				int targetz = other.getLocation().getBlockZ();
     				String targetw = other.getLocation().getWorld().getName();
     				if (player.getWorld().getName() == other.getWorld().getName()) {
-    					player.sendMessage(ChatColor.GREEN + Bukkit.getPlayer(playername).getDisplayName()+ChatColor.GREEN+" is at X:"+targetx+", Y:"+targety+", Z:"+targetz);
+    					player.sendMessage(ChatColor.GREEN + Bukkit.getPlayer(playername).getDisplayName()+ChatColor.GREEN+" is at X:"+targetx+", Y:"+targety+", Z:"+targetz+", "+Math.round(other.getLocation().distance(player.getLocation()))+" metres away.");
     				} else {
     					player.sendMessage(ChatColor.GREEN + Bukkit.getPlayer(playername).getDisplayName()+ChatColor.GREEN+" is at X:"+targetx+", Y:"+targety+", Z:"+targetz+" in "+ChatColor.RED+targetw);
     				}
