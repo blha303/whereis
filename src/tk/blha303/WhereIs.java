@@ -113,27 +113,48 @@ public class WhereIs extends JavaPlugin implements Listener {
     		} 
     		if (player != null) {
     			if (perms.has(player, node)) {
-    				log.info("[PLAYER COMMAND] " + player.getDisplayName() + " used /whereis " + args[0]);
-    				String playername = args[0].toString().toLowerCase();
-    				Player other = Bukkit.getServer().getPlayer(playername);
-    				if (other == null) {
-    					sender.sendMessage(ChatColor.RED + args[0] + " does not match a player name!");
+    				if (!(getConfig().getBoolean("vague"))) {
+    					log.info("[PLAYER COMMAND] " + player.getDisplayName() + " used /whereis " + args[0]);
+    					String playername = args[0].toString().toLowerCase();
+    					Player other = Bukkit.getServer().getPlayer(playername);
+    					if (other == null) {
+    						sender.sendMessage(ChatColor.RED + args[0] + " does not match a player name!");
+    						return true;
+    					}
+    					if (contains(getConfig().getString("world"), other.getWorld().getName())) {
+    						sender.sendMessage(ChatColor.RED + other.getDisplayName() + " is on a world where location is prohibited.");
+    						return true;
+    					}
+    					int targetx = other.getLocation().getBlockX();
+    					int targety = other.getLocation().getBlockY();
+    					int targetz = other.getLocation().getBlockZ();
+    					String targetw = other.getLocation().getWorld().getName();
+    					if (player.getWorld().getName() == other.getWorld().getName()) {
+    						player.sendMessage(ChatColor.GREEN + Bukkit.getPlayer(playername).getDisplayName()+ChatColor.GREEN+" is at X:"+targetx+", Y:"+targety+", Z:"+targetz+", "+Math.round(other.getLocation().distance(player.getLocation()))+" metres away.");
+    					} else {
+    						player.sendMessage(ChatColor.GREEN + Bukkit.getPlayer(playername).getDisplayName()+ChatColor.GREEN+" is at X:"+targetx+", Y:"+targety+", Z:"+targetz+" in "+ChatColor.RED+targetw);
+    					}
     					return true;
-    				}
-    				if (contains(getConfig().getString("world"), other.getWorld().getName())) {
-    					sender.sendMessage(ChatColor.RED + other.getDisplayName() + " is on a world where location is prohibited.");
+    			    } else {
+    			    	log.info("[PLAYER COMMAND] " + player.getDisplayName() + " used /whereis " + args[0]);
+    					String playername = args[0].toString().toLowerCase();
+    					Player other = Bukkit.getServer().getPlayer(playername);
+    					if (other == null) {
+    						sender.sendMessage(ChatColor.RED + args[0] + " does not match a player name!");
+    						return true;
+    					}
+    					if (contains(getConfig().getString("world"), other.getWorld().getName())) {
+    						sender.sendMessage(ChatColor.RED + other.getDisplayName() + " is on a world where location is prohibited.");
+    						return true;
+    					}
+    					if (player.getWorld().getName() == other.getWorld().getName()) {
+    						player.setCompassTarget(other.getLocation());
+    						player.sendMessage(ChatColor.GREEN + Bukkit.getPlayer(playername).getDisplayName()+ChatColor.GREEN+"'s location has been set to your compass.");
+    					} else {
+    						player.sendMessage(ChatColor.RED + Bukkit.getPlayer(playername).getDisplayName() + " is in another world, and vague location is turned on.");
+    					}
     					return true;
-    				}
-    				int targetx = other.getLocation().getBlockX();
-    				int targety = other.getLocation().getBlockY();
-    				int targetz = other.getLocation().getBlockZ();
-    				String targetw = other.getLocation().getWorld().getName();
-    				if (player.getWorld().getName() == other.getWorld().getName()) {
-    					player.sendMessage(ChatColor.GREEN + Bukkit.getPlayer(playername).getDisplayName()+ChatColor.GREEN+" is at X:"+targetx+", Y:"+targety+", Z:"+targetz+", "+Math.round(other.getLocation().distance(player.getLocation()))+" metres away.");
-    				} else {
-    					player.sendMessage(ChatColor.GREEN + Bukkit.getPlayer(playername).getDisplayName()+ChatColor.GREEN+" is at X:"+targetx+", Y:"+targety+", Z:"+targetz+" in "+ChatColor.RED+targetw);
-    				}
-    				return true;
+    			    }
     			} else {
     				player.sendMessage("You don't have permission to use this command.");
     				log.info("[WhereIs] " + player.getName() + " was denied access to /whereis " + args[0]);
